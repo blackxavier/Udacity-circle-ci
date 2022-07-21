@@ -33,6 +33,14 @@ jobs:
       - run:
           name: "Say Hello world again"
           command: "echo World"
+  print_authors_name:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "Print out author's name"
+          command: echo $password
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
