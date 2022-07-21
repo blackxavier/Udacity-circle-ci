@@ -9,7 +9,7 @@ commands:
         type: string
         default: "My_id"
     steps:
-      - run echo << parameters.to >>
+      - run: echo << parameters.to >>
 executors:
   my-executor:
     docker:
