@@ -41,7 +41,7 @@ jobs:
       - run:
           name: "Print out author's name"
           command: echo $password
-  save_job_decription:
+  save_job_description:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -53,7 +53,7 @@ jobs:
           root: /tmp/workspace
           paths:
             - "output.txt"
-  print_job_decription:
+  print_job_description:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -75,6 +75,6 @@ workflows:
       - print_world:
           requires: [print_hello]
       - print_authors_name
-      - save_job_decription
-      - print_job_decription:
+      - save_job_description
+      - print_job_description:
           requires: [save_job_description]
