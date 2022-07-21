@@ -48,9 +48,9 @@ jobs:
       - checkout
       - run:
           name: "Print job role to a file"
-          command: echo "Systems Analyst" > ~/output.txt
+          command: echo "Systems Analyst" > output.txt
       - persist_to_workspace:
-          root: ~/
+          root: ~/workspace/
           paths:
             - output.txt
   print_job_description:
@@ -59,10 +59,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/workspace/
       - run:
           name: "Print job role command output"
-          command: cat ~/output.txt
+          command: cat ~/workspace/output.txt
           
 #made some changesss
 # Invoke jobs via workflows
