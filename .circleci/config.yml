@@ -1,7 +1,12 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
+executors:
+  my-executor:
+    docker:
+      - image: cimg/base:stable
+         # context / project UI env-var reference
+    working_directory: /tmp
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -42,27 +47,27 @@ jobs:
           name: "Print out author's name"
           command: echo $password
   save_job_description:
-    docker:
-      - image: circleci/node:13.8.0
+    executor: my-executor
+    
     steps:
       - checkout
       - run:
           name: "Print job role to a file"
-          command: echo "Systems Analyst" > ~/output.txt
+          command: echo "Systems Analyst" > workspace/output.txt
       - persist_to_workspace:
-          root: ~/
+          root: workspace
           paths:
             - output.txt
   print_job_description:
-    docker:
-      - image: circleci/node:13.8.0
+    executor: my-executor
+    
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: /tmp/workspace
       - run:
           name: "Print job role command output"
-          command: cat ~/output.txt
+          command: cat tmp/workspace/output.txt
           
 #made some changesss
 # Invoke jobs via workflows
