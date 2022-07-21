@@ -50,7 +50,7 @@ jobs:
     executor: my-executor
     
     steps:
-      - checkout
+      
       - run:
           name: "Print job role to a file"
           command: echo "Systems Analyst" > workspace/output.txt
@@ -62,7 +62,7 @@ jobs:
     executor: my-executor
     
     steps:
-      - checkout
+      
       - attach_workspace:
           at: /tmp/workspace
       - run:
