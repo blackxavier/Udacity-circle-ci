@@ -67,7 +67,7 @@ jobs:
           at: /tmp/workspace
       - run:
           name: "Print job role command output"
-          command: cat tmp/workspace/output.txt
+          command: cat /tmp/workspace/output.txt
           
 #made some changesss
 # Invoke jobs via workflows
