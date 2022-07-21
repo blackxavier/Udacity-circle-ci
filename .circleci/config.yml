@@ -6,7 +6,7 @@ commands:
     description: "A pipeline that prints the workflow ID"
     parameters:
       to:
-        type: integer
+        type: string
         default: 1
     steps:
       - run echo << parameters.to >>
