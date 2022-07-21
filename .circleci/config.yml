@@ -1,6 +1,15 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+commands:
+  print_pipeline_id:
+    description: "A pipeline that prints the workflow ID"
+    parameters:
+      to:
+        type: integer
+        default: 1
+    steps:
+      - run echo << parameters.to >>
 executors:
   my-executor:
     docker:
@@ -68,6 +77,12 @@ jobs:
       - run:
           name: "Print job role command output"
           command: cat /tmp/workspace/output.txt
+  print_workfow-id:
+    executor: my-executor
+    
+    steps:
+      - print_pipeline_id:
+          to: $CIRCLE_WORKFLOW_ID
           
 #made some changesss
 # Invoke jobs via workflows
@@ -83,3 +98,4 @@ workflows:
       - save_job_description
       - print_job_description:
           requires: [save_job_description]
+      - print_workfow-id
