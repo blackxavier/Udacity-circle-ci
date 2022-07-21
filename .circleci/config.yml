@@ -41,6 +41,29 @@ jobs:
       - run:
           name: "Print out author's name"
           command: echo $password
+  save_job_decription:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "Print job role to a file"
+          command: echo "Systems Analyst" > output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - "output.txt"
+  print_job_decription:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: "Print job role command output"
+          command: cat output.txt
+          
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -52,3 +75,6 @@ workflows:
       - print_world:
           requires: [print_hello]
       - print_authors_name
+      - save_job_decription
+      - print_job_decription:
+          requires: [save_job_description]
