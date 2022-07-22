@@ -83,6 +83,22 @@ jobs:
       - run:
           name: "Print job role command output"
           command: cat /tmp/workspace/output.txt
+  failed_test:
+    executor: my-executor
+    
+    steps:
+      
+      - attach_workspace:
+          at: /failed_jobs
+      - run:
+          name: "Print job role command output"
+          command: cat /failed_jobs/output.txt
+      - run:
+          name: Upload failed tests
+          command: echo "A job failed" 
+          when: on_fail
+          
+    
           
   print_workflow_id:
     executor: my-executor
@@ -106,3 +122,4 @@ workflows:
       - print_job_description:
           requires: [save_job_description]
       - print_workflow_id
+      - failed_test
